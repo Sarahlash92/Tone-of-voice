@@ -2,6 +2,7 @@ import path from "path";
 import { extractTextFromDocx } from "../utils/docxReader";
 import { ChatOpenAI } from "@langchain/openai";
 import { searchWeb } from "../utils/webSearch";
+import fs from "fs/promises"; // To save the result to a file
 
 const model = new ChatOpenAI({
   modelName: "gpt-4",
@@ -42,8 +43,9 @@ ${text}
       console.warn("⚠️ Could not parse brand info.");
     }
 
+    // Perform web search using the company name
     const articles = await searchWeb(companyName);
-    const articleText = articles.join("\n\n").slice(0, 1500);
+    const articleText = articles.join("\n\n").slice(0, 1500); // Limit the text size
 
     const prompt = `
 You are a tone and brand expert.
@@ -69,6 +71,7 @@ Respond in JSON:
 }
 `;
 
+    // Analyze tone of voice using OpenAI
     const analysisResponse = await model.call([
       { role: "user", content: prompt },
     ]);
@@ -79,6 +82,15 @@ Respond in JSON:
     } catch {
       toneSignature = { rawOutput: analysisResponse.content };
     }
+
+    // Define the output path for saving the tone signature
+    const outputDir = path.resolve(__dirname, "../output");
+    await fs.mkdir(outputDir, { recursive: true }); // Create output folder if it doesn't exist
+
+    const outputFilePath = path.resolve(outputDir, `${companyName}_tone_signature.json`);
+
+    // Save the tone signature to a JSON file
+    await fs.writeFile(outputFilePath, JSON.stringify(toneSignature, null, 2), "utf-8");
 
     return { companyName, toneSignature };
   } catch (error) {
