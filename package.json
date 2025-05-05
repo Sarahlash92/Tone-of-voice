@@ -1,0 +1,37 @@
+{
+  "name": "tone-of-voice",
+  "version": "1.0.0",
+  "description": "project for deriving a consistent tone of voice from existing corporate communications that serves as the \"signature\" of the brand",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.ts",
+    "start:dev": "nodemon index.ts",
+    "build": "npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarahlash92/Tone-of-voice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sarahlash92/Tone-of-voice/issues"
+  },
+  "homepage": "https://github.com/Sarahlash92/Tone-of-voice#readme",
+  "dependencies": {
+    "@langchain/core": "^0.3.51",
+    "@langchain/openai": "^0.5.10",
+    "dotenv": "^16.5.0",
+    "langchain": "^0.3.24",
+    "openai": "^4.97.0",
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
