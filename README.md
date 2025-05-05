@@ -2,12 +2,17 @@
 
 project for deriving a consistent tone of voice from existing corporate communications that serves as the "signature" of the brand
 
-## TechStack 
+the approch of this project was to create a text analysis service, that takes from a provided doc, extracts company name, then injects the outcomes in the tone analysis to create a prompt for the tone signature, websearch is also used just to exand the knowledge of the code base
+
+## TechStack & Libraries 
 
 - nodeJs
 - Typescript 
 - OpenAI key 
 - Langchain Library 
+- Cheerio 
+- axios 
+    DuckDuckGo for searched
 
 ## Setup 
 
